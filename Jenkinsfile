@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Lint'){
             steps {
-                bash 'terraform fmt'
+                sh 'terraform fmt'
             }
         }
 
@@ -15,14 +15,14 @@ pipeline {
 
         stage('Validation'){
             steps {
-                bash 'terraform init'
-                bash 'terraform validate'
+                sh 'terraform init'
+                sh 'terraform validate'
             }
         }
 
         stage('Plan'){
             steps {
-                bash '''
+                sh '''
                 source /.connection.env
                 terraform plan -out=plan.tfplan
                 '''
@@ -31,8 +31,8 @@ pipeline {
 
         stage('Move Plan'){
             steps {
-                bash 'mkdir -p /home/wsl/pfa/CD/terraform-files'
-                bash 'mv plan.tfplan /home/wsl/pfa/CD/terraform-files'
+                sh 'mkdir -p /home/wsl/pfa/CD/terraform-files'
+                sh 'mv plan.tfplan /home/wsl/pfa/CD/terraform-files'
             }
         }
     }
@@ -40,7 +40,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            bash 'rm -rf *.tf'
+            sh 'rm -rf *.tf'
         }
 
         success {
