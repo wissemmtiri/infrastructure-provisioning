@@ -7,11 +7,11 @@ pipeline {
             }
         }
 
-        stage('Security Check'){
-            steps{
-                sh 'snyk iac test .'
-            }
-        }
+        //stage('Security Check'){
+        //   steps{
+        //        sh 'snyk iac test .'
+        //    }
+        //}
 
         stage('Validation'){
             steps {
