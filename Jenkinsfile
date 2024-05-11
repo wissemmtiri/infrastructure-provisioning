@@ -22,7 +22,10 @@ pipeline {
 
         stage('Plan'){
             steps {
-                sh 'terraform plan -out=plan.tfplan'
+                sh '''
+                source /.connection.env
+                terraform plan -out=plan.tfplan
+                '''
             }
         }
 
