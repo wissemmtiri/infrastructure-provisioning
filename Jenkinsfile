@@ -28,8 +28,7 @@ pipeline {
 
         stage('Move Plan'){
             steps {
-                sh 'mkdir -p /home/wsl/pfa/CD/terraform-files'
-                sh 'mv plan.tfplan /home/wsl/pfa/CD/terraform-files'
+                sh 'mv plan.tfplan /cd'
             }
         }
     }
@@ -37,7 +36,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            sh 'rm -rf *.tf'
+            sh 'rm -rf *.tf *.tfplan'
         }
 
         success {
